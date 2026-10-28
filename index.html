@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#07141c">
+<title>空白の積荷 | Unity WebGL デバッグ</title>
+<style>
+:root { color-scheme:dark; font-family:system-ui,-apple-system,"Hiragino Kaku Gothic ProN",Meiryo,sans-serif }
+* { box-sizing:border-box }
+html,body { width:100%;height:100%;margin:0;background:#061018;color:#c9d5d3;overflow:hidden }
+#shell { width:100%;height:100%;display:flex;flex-direction:column;min-height:0;overscroll-behavior:none }
+header { height:43px;flex:0 0 43px;display:flex;align-items:center;justify-content:space-between;
+  border-bottom:1px solid #243944;padding:0 16px;background:#101e28;gap:10px }
+header strong { font-size:12px;letter-spacing:.15em;white-space:nowrap }
+header small { font-size:11px;color:#88aba7;text-align:right }
+main { position:relative;flex:1;min-height:0 }
+canvas { width:100%;height:100%;display:block;touch-action:none;outline:none;background:#08151e }
+#loading { position:absolute;inset:0;z-index:3;background:#0b1b25;display:flex;flex-direction:column;
+align-items:center;justify-content:center;gap:16px;text-align:center;padding:22px }
+#loading h1 { margin:0;font-size:24px;letter-spacing:.18em;font-weight:650 }
+#loading p { font-size:13px;line-height:1.7;color:#9aadaf;margin:0;max-width:430px }
+#progress { height:3px;background:#28404b;width:min(280px,80vw);overflow:hidden;border-radius:4px }
+#bar { width:0;height:100%;background:#8dc3aa;transition:width .15s }
+#state { font-size:11px;color:#86a7aa }
+#retry { display:none;background:#25483e;color:#e6f5ea;border:1px solid #6f9b87;
+border-radius:5px;padding:9px 16px;cursor:pointer }
+@media(max-width:740px) { header small { font-size:9px } header strong { font-size:11px } }
+</style>
+</head>
+<body>
+<div id="shell">
+<header>
+<strong>BLANK MANIFEST <span style="color:#83a69a;font-weight:400">/ UI DEBUG</span></strong>
+<small>現場：WASD＋マウス / Eで調査 &nbsp; · &nbsp; Tabでタブレット &nbsp; · &nbsp; 通信はデモ応答</small>
+</header>
+<main>
+<canvas id="game" tabindex="0" aria-label="Unity game window"></canvas>
+<div id="loading" role="status">
+<h1>BLANK MANIFEST</h1>
+<p>港の調査地点を巡り、タブレットで通信・地図・捜査メモを確認できます。<br>
+この公開版のナツは固定のデモ応答です。ローカルLFM3は接続されません。</p>
+<div id="progress"><div id="bar"></div></div>
+<div id="state">UNITY PLAYER INITIALIZING</div>
+<button id="retry" onclick="location.reload()">再読み込み</button>
+</div>
+</main>
+</div>
+<script>
+"use strict";
+const canvas=document.getElementById("game");
+const state=document.getElementById("state");
+const load=document.getElementById("loading");
+const retry=document.getElementById("retry");
+const dataPath="Build/";
+function fail(err){
+  state.textContent="起動エラー: "+(err?.message||String(err));
+  retry.style.display="inline-block";
+}
+if(!canvas.getContext("webgl2")){
+  fail(new Error("WebGL2対応ブラウザが必要です"));
+}else{
+  const loader=document.createElement("script");
+  loader.src=dataPath+"WebGL.loader.js";
+  loader.onerror=()=>fail(new Error("Unityの読み込みに失敗しました"));
+  loader.onload=()=>createUnityInstance(canvas,{
+    dataUrl:dataPath+"WebGL.data",
+    frameworkUrl:dataPath+"WebGL.framework.js",
+    codeUrl:dataPath+"WebGL.wasm",
+    streamingAssetsUrl:"StreamingAssets",
+    companyName:"Blank Manifest",
+    productName:"Blank Manifest Debug",
+    productVersion:"0.1",
+    devicePixelRatio:Math.min(1.5,window.devicePixelRatio||1),
+    matchWebGLToCanvasSize:true
+  }, progress=>{document.getElementById("bar").style.width=Math.round(progress*100)+"%";})
+  .then(()=>{load.style.display="none";canvas.focus({preventScroll:true});})
+  .catch(fail);
+  document.body.appendChild(loader);
+}
+canvas.addEventListener("contextmenu",e=>e.preventDefault());
+canvas.addEventListener("touchmove",e=>{if(e.cancelable)e.preventDefault();},{passive:false});
+</script>
+</body>
+</html>
