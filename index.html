@@ -44,7 +44,7 @@ const state=document.getElementById("state");
 const load=document.getElementById("loading");
 const retry=document.getElementById("retry");
 const dataPath="Build/";
-const buildRevision="f21928a25524";
+const buildRevision="9c3f22bb8273";
 const asset=name=>dataPath+name+"?v="+buildRevision;
 function fail(err){
   state.textContent="起動エラー: "+(err?.message||String(err));
