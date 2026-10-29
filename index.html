@@ -44,6 +44,8 @@ const state=document.getElementById("state");
 const load=document.getElementById("loading");
 const retry=document.getElementById("retry");
 const dataPath="Build/";
+const buildRevision="f21928a25524";
+const asset=name=>dataPath+name+"?v="+buildRevision;
 function fail(err){
   state.textContent="起動エラー: "+(err?.message||String(err));
   retry.style.display="inline-block";
@@ -52,12 +54,12 @@ if(!canvas.getContext("webgl2")){
   fail(new Error("WebGL2対応ブラウザが必要です"));
 }else{
   const loader=document.createElement("script");
-  loader.src=dataPath+"WebGL.loader.js";
+  loader.src=asset("WebGL.loader.js");
   loader.onerror=()=>fail(new Error("Unityの読み込みに失敗しました"));
   loader.onload=()=>createUnityInstance(canvas,{
-    dataUrl:dataPath+"WebGL.data",
-    frameworkUrl:dataPath+"WebGL.framework.js",
-    codeUrl:dataPath+"WebGL.wasm",
+    dataUrl:asset("WebGL.data"),
+    frameworkUrl:asset("WebGL.framework.js"),
+    codeUrl:asset("WebGL.wasm"),
     streamingAssetsUrl:"StreamingAssets",
     companyName:"Blank Manifest",
     productName:"Blank Manifest Debug",
