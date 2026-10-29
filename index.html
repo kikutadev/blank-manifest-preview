@@ -2,18 +2,14 @@
 <html lang="ja">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,maximum-scale=1">
 <meta name="theme-color" content="#07141c">
-<title>空白の積荷 | Unity WebGL デバッグ</title>
+<title>捜査画面プレビュー</title>
 <style>
 :root { color-scheme:dark; font-family:system-ui,-apple-system,"Hiragino Kaku Gothic ProN",Meiryo,sans-serif }
 * { box-sizing:border-box }
 html,body { width:100%;height:100%;margin:0;background:#061018;color:#c9d5d3;overflow:hidden }
 #shell { width:100%;height:100%;display:flex;flex-direction:column;min-height:0;overscroll-behavior:none }
-header { height:43px;flex:0 0 43px;display:flex;align-items:center;justify-content:space-between;
-  border-bottom:1px solid #243944;padding:0 16px;background:#101e28;gap:10px }
-header strong { font-size:12px;letter-spacing:.15em;white-space:nowrap }
-header small { font-size:11px;color:#88aba7;text-align:right }
 main { position:relative;flex:1;min-height:0 }
 canvas { width:100%;height:100%;display:block;touch-action:none;outline:none;background:#08151e }
 #loading { position:absolute;inset:0;z-index:3;background:#0b1b25;display:flex;flex-direction:column;
@@ -25,23 +21,18 @@ align-items:center;justify-content:center;gap:16px;text-align:center;padding:22p
 #state { font-size:11px;color:#86a7aa }
 #retry { display:none;background:#25483e;color:#e6f5ea;border:1px solid #6f9b87;
 border-radius:5px;padding:9px 16px;cursor:pointer }
-@media(max-width:740px) { header small { font-size:9px } header strong { font-size:11px } }
 </style>
 </head>
 <body>
 <div id="shell">
-<header>
-<strong>BLANK MANIFEST <span style="color:#83a69a;font-weight:400">/ UI DEBUG</span></strong>
-<small>現場：WASD＋マウス / Eで調査 &nbsp; · &nbsp; Tabでタブレット &nbsp; · &nbsp; 通信はデモ応答</small>
-</header>
 <main>
 <canvas id="game" tabindex="0" aria-label="Unity game window"></canvas>
 <div id="loading" role="status">
-<h1>BLANK MANIFEST</h1>
+<h1>読み込み中</h1>
 <p>港の調査地点を巡り、タブレットで通信・地図・捜査メモを確認できます。<br>
 この公開版のナツは固定のデモ応答です。ローカルLFM3は接続されません。</p>
 <div id="progress"><div id="bar"></div></div>
-<div id="state">UNITY PLAYER INITIALIZING</div>
+<div id="state">ゲームを準備しています</div>
 <button id="retry" onclick="location.reload()">再読み込み</button>
 </div>
 </main>
