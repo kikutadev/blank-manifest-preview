@@ -8,9 +8,9 @@
 <style>
 :root { color-scheme:dark; font-family:system-ui,-apple-system,"Hiragino Kaku Gothic ProN",Meiryo,sans-serif }
 * { box-sizing:border-box }
-html,body { width:100%;height:100%;margin:0;background:#061018;color:#c9d5d3;overflow:hidden }
-#shell { width:100%;height:100%;display:flex;flex-direction:column;min-height:0;overscroll-behavior:none }
-main { position:relative;flex:1;min-height:0 }
+html,body { width:100%;height:100%;margin:0;background:#061018;color:#c9d5d3;overflow:hidden;overscroll-behavior:none;touch-action:none }
+#shell { width:100%;height:100%;display:flex;flex-direction:column;min-height:0;overscroll-behavior:none;touch-action:none }
+main { position:relative;flex:1;min-height:0;touch-action:none }
 canvas { width:100%;height:100%;display:block;touch-action:none;outline:none;background:#08151e }
 #loading { position:absolute;inset:0;z-index:3;background:#0b1b25;display:flex;flex-direction:column;
 align-items:center;justify-content:center;gap:16px;text-align:center;padding:22px }
@@ -44,8 +44,15 @@ const state=document.getElementById("state");
 const load=document.getElementById("loading");
 const retry=document.getElementById("retry");
 const dataPath="Build/";
-const buildRevision="9ad4127f7c3f";
+const buildRevision="74126119c828";
 const asset=name=>dataPath+name+"?v="+buildRevision;
+// Only block browser gestures, never a normal touchstart/touchend:
+// Unity UI Toolkit needs those to produce button clicks.
+for(const name of ["gesturestart","gesturechange","gestureend"]){
+  document.addEventListener(name,e=>{ if(e.cancelable)e.preventDefault(); },{passive:false});
+}
+canvas.addEventListener("touchmove",e=>{ if(e.cancelable)e.preventDefault(); },{passive:false});
+canvas.addEventListener("contextmenu",e=>e.preventDefault());
 function fail(err){
   state.textContent="起動エラー: "+(err?.message||String(err));
   retry.style.display="inline-block";
