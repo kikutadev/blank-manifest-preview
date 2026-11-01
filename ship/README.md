@@ -1,3 +1,3 @@
-# ARGO P11 - smoothly shaded opening
+# ARGO P11 curve retopology
 
-BlenderのFlatを修正して開幕付近の134メッシュをスムーズ化。機械加工された鋭角は38°から維持。WebGL PC/スマホで機能確認。
+既存の構造アーチ4本と連続天井を実メッシュ再分割。Macで4x MSAA適用を確認。開幕美術は継続調整中。
