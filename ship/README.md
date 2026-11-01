@@ -1,3 +1,3 @@
-# ARGO P11 seal and light
+# ARGO P11 first-view focused lighting / satin tread
 
-既存の防圧扉の密閉シールをBlender実造形で細くし、金属内面を復元。床の斜光と接地影を調整。P11スタート地点は美術調整継続中。
+11個の散漫なP11スポットライトを6個に整理し、扉・床・側壁に光の役割を分離。Blenderの既存中央歩行帯は低光沢の滑り止め複合材へ変更。まだ美術合格ではありません。
