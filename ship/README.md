@@ -1,3 +1,3 @@
-# ARGO ShipTrial preview
+# ARGO ShipTrial プレビュー
 
-P20: P16-19 real geometry retained, common physically classified PBR maps added to roof, pressure bulkhead, deck: painted steel / traction / exposed machined steel. Compare p11-before.png (P19) and p11-after.png (P20). p20-detail.png is P20 close-up. WebGL is a UI preview; LFM3 conversations are not enabled.
+P21: P20から左右隔壁のUVを実際の接触箇所に適用し、CC0写真由来の摩耗PBRを追加。既存6灯の配光・色温度を整理。扉・レール・床の造形、調査システムは維持。比較 p11-before.png (P20) / p11-after.png (P21)、近接 p21-detail.png、側面 p21-side.png。WebGLはUIプレビューでありLFM3会話生成はありません。
