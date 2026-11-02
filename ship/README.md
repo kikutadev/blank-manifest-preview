@@ -1,3 +1,3 @@
-# ARGO ShipTrial プレビュー
+# ARGO ShipTrial preview
 
-P25: P24の実際の船内をエディタで6方向撮影した静的128px Cubemapを、box-projected ReflectionProbeで金属素材へ割り当て。6灯・低負荷床反射2灯・扉・天井造形は維持。比較画像: p11-before.png / p11-after.png、天井 p25-ceiling-before.png / p25-ceiling-after.png、扉近接 p25-door-close.png。WebGLはUIプレビュー、LFM3会話生成なし。
+P26: Photographed source plate macro-seams removed from 15 PBR maps. The existing titanium roof support former uses an appropriately rough, bead-blasted metal material instead of glossy brushing. P25 static reflection and P22 ceiling light geometry retained. Compare p11-before.png and p11-after.png; roof p26-ceiling-before.png and p26-ceiling-after.png, door close p26-door-close.png. WebGL is UI preview and LFM3 conversations are disabled.
