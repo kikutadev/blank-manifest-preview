@@ -1,3 +1,3 @@
-# ARGO ShipTrialプレビュー
+# ARGO ShipTrial preview
 
-P19: P17天井、P18左右隔壁、P19一体成形デッキ床の造形改修。比較 `p11-before.png`（P18）／`p11-after.png`（P19）。床の近景 `p19-deck-detail.png`。WebGLはUIプレビュー、LFM3会話生成なし。
+P20: P16-19 real geometry retained, common physically classified PBR maps added to roof, pressure bulkhead, deck: painted steel / traction / exposed machined steel. Compare p11-before.png (P19) and p11-after.png (P20). p20-detail.png is P20 close-up. WebGL is a UI preview; LFM3 conversations are not enabled.
